@@ -41,7 +41,7 @@ export const portfolioData: PortfolioData = {
     email: "aljen.mondarte@gmail.com",
     phone: "0915 945 4127",
     birthDate: "October 5, 2001",
-    profileImage: "/tuxedo.png",
+    profileImage: "/tuxedo.v1.png",
     aboutMe: [
       "I am a passionate and dedicated individual currently pursuing a Bachelor in Industrial Technology (BIT) at Cebu Technological University. With a strong foundation in both technical and practical skills, I am actively training in Information Technology, specializing in web development and application creation.",
       "At the same time, I am currently training as a Web Developer at Limehills.Tech, where I continue to enhance my skills and gain practical experience in building modern web applications.",

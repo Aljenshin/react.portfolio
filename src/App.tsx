@@ -7,22 +7,62 @@ import Education from './pages/Education';
 import WorkExperience from './pages/WorkExperience';
 import Hobbies from './pages/Hobbies';
 import Contact from './pages/Contact';
+import Login from './pages/admin/Login';
+import Dashboard from './pages/admin/Dashboard';
+import ProtectedRoute from './components/ProtectedRoute';
+import { AuthProvider } from './contexts/AuthContext';
+import { MessageProvider } from './contexts/MessageContext';
 import { portfolioData } from './data/portfolioData';
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <Layout personalInfo={portfolioData.personalInfo}>
-        <Routes>
-          <Route path="/" element={<AboutMe personalInfo={portfolioData.personalInfo} />} />
-          <Route path="/skills" element={<Skills skills={portfolioData.skills} certifications={portfolioData.certifications} />} />
-          <Route path="/education" element={<Education education={portfolioData.education} />} />
-          <Route path="/work" element={<WorkExperience workExperience={portfolioData.workExperience} />} />
-          <Route path="/hobbies" element={<Hobbies hobbies={portfolioData.hobbies} />} />
-          <Route path="/contact" element={<Contact personalInfo={portfolioData.personalInfo} />} />
-        </Routes>
-      </Layout>
-    </Router>
+    <AuthProvider>
+      <MessageProvider>
+        <Router>
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={
+              <Layout personalInfo={portfolioData.personalInfo}>
+                <AboutMe personalInfo={portfolioData.personalInfo} />
+              </Layout>
+            } />
+            <Route path="/skills" element={
+              <Layout personalInfo={portfolioData.personalInfo}>
+                <Skills skills={portfolioData.skills} certifications={portfolioData.certifications} />
+              </Layout>
+            } />
+            <Route path="/education" element={
+              <Layout personalInfo={portfolioData.personalInfo}>
+                <Education education={portfolioData.education} />
+              </Layout>
+            } />
+            <Route path="/work" element={
+              <Layout personalInfo={portfolioData.personalInfo}>
+                <WorkExperience workExperience={portfolioData.workExperience} />
+              </Layout>
+            } />
+            <Route path="/hobbies" element={
+              <Layout personalInfo={portfolioData.personalInfo}>
+                <Hobbies hobbies={portfolioData.hobbies} />
+              </Layout>
+            } />
+            <Route path="/contact" element={
+              <Layout personalInfo={portfolioData.personalInfo}>
+                <Contact personalInfo={portfolioData.personalInfo} />
+              </Layout>
+            } />
+            
+            {/* Admin Routes */}
+            <Route path="/admin/login" element={<Login />} />
+            <Route path="/admin/dashboard" element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            } />
+          </Routes>
+        </Router>
+      </MessageProvider>
+    </AuthProvider>
   );
 };
 
