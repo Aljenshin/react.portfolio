@@ -259,17 +259,25 @@ export const StatsCard: React.FC<StatsCardProps> = ({
 }) => {
   return (
     <div className="text-center p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm hover-lift transition-all duration-300 animate-fade-in">
-      {icon && (
-        <div className={`inline-flex p-3 rounded-full bg-gradient-to-r ${color} text-white mb-4`}>
-          {icon}
-        </div>
-      )}
-      <AnimatedCounter 
-        end={value} 
-        suffix={suffix}
-        className="text-3xl md:text-4xl font-bold text-white mb-2"
-      />
+      <div className={`mx-auto mb-4 flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r ${color} text-white shadow-lg`}>
+        <span className="text-lg mr-1" aria-hidden>{icon}</span>
+        <AnimatedCounter end={value} suffix={suffix} className="text-2xl font-extrabold text-white" />
+      </div>
       <p className="text-slate-300 text-sm font-medium">{label}</p>
+    </div>
+  );
+};
+
+// Simple marquee for tech stack
+export const TechMarquee: React.FC<{ items: string[] }> = ({ items }) => {
+  const duplicated = [...items, ...items];
+  return (
+    <div className="marquee-container marquee-fade border-y border-white/10 bg-white/5">
+      <div className="marquee-track">
+        {duplicated.map((item, idx) => (
+          <span key={idx} className="marquee-pill">{item}</span>
+        ))}
+      </div>
     </div>
   );
 };

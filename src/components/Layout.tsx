@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ProfileImage, AnimatedCounter } from './SharedComponents';
+import { ProfileImage, AnimatedCounter, TechMarquee } from './SharedComponents';
 import { PersonalInfo } from '../data/portfolioData';
 
 interface LayoutProps {
@@ -36,6 +36,15 @@ const Layout: React.FC<LayoutProps> = ({ children, personalInfo }) => {
       <div className="absolute inset-0 opacity-20" style={{
         backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
       }}></div>
+      {/* Spotlight cursor layer */}
+      <div
+        className="spotlight"
+        onMouseMove={(e) => {
+          const root = document.documentElement as HTMLElement;
+          root.style.setProperty('--spot-x', `${e.clientX}px`);
+          root.style.setProperty('--spot-y', `${e.clientY}px`);
+        }}
+      />
       
       {/* Animated gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-brand-500/10 via-purple-500/10 to-cyan-500/10 animate-pulse-slow"></div>
@@ -101,6 +110,12 @@ const Layout: React.FC<LayoutProps> = ({ children, personalInfo }) => {
                   <p className="text-xs text-slate-400">Projects</p>
                 </div>
               </div>
+
+              {/* CTAs */}
+              <div className="mt-6 flex flex-wrap gap-3">
+                <a href="#contact" className="px-5 py-2 rounded-lg bg-gradient-to-r from-brand-500 to-purple-500 text-white hover:opacity-90 transition">Hire Me</a>
+                <a href="#projects" className="px-5 py-2 rounded-lg bg-white/10 text-white border border-white/10 hover:bg-white/20 transition">View Projects</a>
+              </div>
             </div>
           </div>
           <div className="flex flex-wrap gap-2 md:gap-3 animate-slide-in-right delay-300">
@@ -130,6 +145,13 @@ const Layout: React.FC<LayoutProps> = ({ children, personalInfo }) => {
             ))}
           </div>
         </nav>
+
+        {/* Tech stack marquee */}
+        <div className="mb-8">
+          <TechMarquee items={[
+            'React', 'TypeScript', 'Tailwind CSS', 'Laravel', 'PHP', 'MySQL', 'REST API', 'Vite', 'Git'
+          ]} />
+        </div>
 
         {/* Main Content */}
         <main>

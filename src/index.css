@@ -291,3 +291,72 @@ body {
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
+
+/* Spotlight cursor effect */
+.spotlight {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(600px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(59,130,246,0.15), transparent 40%),
+              radial-gradient(800px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(168,85,247,0.08), transparent 45%);
+  transition: background-position 0.05s ease;
+}
+
+/* Marquee redesign */
+.marquee-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 0.75rem;
+  width: max-content;
+  padding: 0.5rem 0;
+  animation: marqueeScroll 25s linear infinite;
+}
+
+.marquee-container:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-fade::before,
+.marquee-fade::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 80px;
+  height: 100%;
+  pointer-events: none;
+}
+
+.marquee-fade::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(15,23,42,1), rgba(15,23,42,0));
+}
+
+.marquee-fade::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(15,23,42,1), rgba(15,23,42,0));
+}
+
+.marquee-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  color: #e2e8f0;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  white-space: nowrap;
+}
+
+.marquee-pill:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
